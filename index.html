@@ -1,589 +1,976 @@
+这次为你带来一个**风格反差极大**、具有**北欧顶级杂志排版与极简白（Warm Editorial Light & Spatial Canvas）**质感的全新网页——**「AuraFlow (灵境织流) | 下一代空间化思考画布与企业认知工作台」**。
+
+相比前两次的硬核暗黑科技，这次采用类似 **Linear / Craft / Notion / Heptabase** 的顶级现代浅色美学：
+* **色彩与质感体系**：选用高质感暖白底色（`#faf9f6`）、纯白磨砂浮动卡片、黑巧深棕（`#18181b`）与**暖日落琥珀（Warm Amber `#f59e0b`）**、**钴蓝（Cobalt `#2563eb`）**微点缀。
+* **Typography 排版**：引入 Google Fonts 艺术级衬线字体 `Newsreader` / `Fraunces` 搭配现代工整无衬线 `Plus Jakarta Sans`，营造出极高审美、克制而高级的视觉享受。
+* **Hero 空间画布模拟器**：右侧展示了一座**沉浸式多维知识节点图谱白板**，内嵌多张带呼吸连接线、协作者活跃浮动光标和标签的思维卡片。
+* **完整功能结构**：包含导航、Hero 画布、6 宫格特性、4 项关键效能指标、带左右翻页的客户评价轮播、支持月/年付 8 折切换的阶梯定价器、全幅 CTA 呼吁和完整页脚。
+
+---
+
+### 完整 HTML 代码
+
+你可以将以下代码直接新建保存为 `.html` 文件（如 `auraflow.html`），双击即可在浏览器中打开预览：
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CodeFlow | Visual Development Platform</title>
+    <title>AuraFlow | The Spatial Canvas for Deep Thinkers</title>
+    <!-- Font Awesome & Modern Typography -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bg-base: #fcfbf9;
+            --bg-canvas: #f5f4ef;
+            --bg-surface: #ffffff;
+            --border-light: rgba(24, 24, 27, 0.08);
+            --border-hover: rgba(24, 24, 27, 0.2);
+            --text-heading: #18181b;
+            --text-muted: #71717a;
+            --text-subtle: #a1a1aa;
+            --brand-primary: #18181b;
+            --brand-accent: #f59e0b;
+            --brand-blue: #2563eb;
+            --font-serif: 'Fraunces', Georgia, serif;
+            --font-sans: 'Plus Jakarta Sans', -apple-system, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --shadow-subtle: 0 4px 20px -2px rgba(24, 24, 27, 0.05);
+            --shadow-float: 0 20px 40px -12px rgba(24, 24, 27, 0.08);
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: 'Roboto', sans-serif;
+            font-family: var(--font-sans);
+            background-color: var(--bg-base);
+            color: var(--text-heading);
             line-height: 1.6;
-            color: #333;
-            background-color: #f9fbfd;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 20% 15%, rgba(245, 158, 11, 0.04) 0%, transparent 40%),
+                radial-gradient(circle at 80% 85%, rgba(37, 99, 235, 0.03) 0%, transparent 40%);
         }
-        
-        h1, h2, h3, h4 {
-            font-family: 'Poppins', sans-serif;
-            font-weight: 600;
-            line-height: 1.3;
-        }
-        
+
         .container {
             width: 100%;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 24px;
         }
-        
+
+        /* Top Notification Ribbon */
+        .top-ribbon {
+            background-color: #18181b;
+            color: #fafafa;
+            font-size: 13px;
+            padding: 8px 16px;
+            text-align: center;
+            font-weight: 500;
+            letter-spacing: 0.2px;
+        }
+
+        .top-ribbon a {
+            color: #fde047;
+            text-decoration: underline;
+            margin-left: 6px;
+        }
+
         /* Header & Navigation */
         header {
-            background-color: #fff;
-            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
-            position: fixed;
+            position: sticky;
+            top: 0;
+            left: 0;
             width: 100%;
             z-index: 1000;
+            background: rgba(252, 251, 249, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-light);
         }
-        
+
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 0;
+            height: 74px;
         }
-        
+
         .logo {
             display: flex;
             align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--text-heading);
         }
-        
-        .logo-icon {
-            color: #4361ee;
-            font-size: 28px;
-            margin-right: 10px;
+
+        .logo-symbol {
+            width: 36px;
+            height: 36px;
+            background: #18181b;
+            color: #fff;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
         }
-        
+
         .logo-text {
-            font-family: 'Poppins', sans-serif;
-            font-size: 24px;
-            font-weight: 700;
-            color: #333;
+            font-family: var(--font-serif);
+            font-size: 22px;
+            font-weight: 600;
+            letter-spacing: -0.5px;
         }
-        
-        .logo-text span {
-            color: #4361ee;
-        }
-        
+
         .nav-links {
             display: flex;
             list-style: none;
+            gap: 32px;
         }
-        
-        .nav-links li {
-            margin-left: 30px;
-        }
-        
+
         .nav-links a {
             text-decoration: none;
-            color: #555;
+            color: var(--text-muted);
+            font-size: 15px;
             font-weight: 500;
-            transition: color 0.3s;
+            transition: color 0.2s;
         }
-        
+
         .nav-links a:hover {
-            color: #4361ee;
+            color: var(--text-heading);
         }
-        
-        .cta-button {
-            background-color: #4361ee;
-            color: white;
-            border: none;
-            padding: 12px 28px;
-            border-radius: 6px;
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .btn-black {
+            background-color: #18181b;
+            color: #ffffff;
             font-weight: 600;
+            font-size: 14px;
+            padding: 10px 22px;
+            border-radius: 9999px;
+            border: 1px solid #18181b;
             cursor: pointer;
-            transition: background-color 0.3s, transform 0.2s;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
         }
-        
-        .cta-button:hover {
-            background-color: #3a56d4;
-            transform: translateY(-2px);
+
+        .btn-black:hover {
+            background-color: #27272a;
+            transform: translateY(-1px);
         }
-        
-        .mobile-menu-btn {
+
+        .btn-white {
+            background-color: #ffffff;
+            color: #18181b;
+            font-weight: 600;
+            font-size: 14px;
+            padding: 10px 22px;
+            border-radius: 9999px;
+            border: 1px solid var(--border-light);
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+
+        .btn-white:hover {
+            border-color: var(--border-hover);
+            background-color: #fbfbfa;
+        }
+
+        .mobile-btn {
             display: none;
             background: none;
             border: none;
-            font-size: 24px;
-            color: #333;
+            font-size: 20px;
+            color: var(--text-heading);
             cursor: pointer;
         }
-        
+
         /* Hero Section */
         .hero {
-            padding: 150px 0 100px;
-            background: linear-gradient(135deg, #f0f4ff 0%, #f9fbfd 100%);
+            padding: 90px 0 100px;
         }
-        
-        .hero-content {
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .hero-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 5px 14px;
+            background: #f4f3ee;
+            border: 1px solid rgba(24, 24, 27, 0.08);
+            border-radius: 9999px;
+            font-size: 13px;
+            font-weight: 500;
+            color: #52525b;
+            margin-bottom: 24px;
+        }
+
+        .hero-pill i {
+            color: var(--brand-accent);
+        }
+
+        .hero-title {
+            font-family: var(--font-serif);
+            font-size: 54px;
+            font-weight: 600;
+            line-height: 1.15;
+            letter-spacing: -1.2px;
+            color: #18181b;
+            margin-bottom: 20px;
+        }
+
+        .hero-title em {
+            font-style: italic;
+            font-weight: 400;
+            color: #4b5563;
+        }
+
+        .hero-desc {
+            font-size: 18px;
+            color: var(--text-muted);
+            line-height: 1.7;
+            margin-bottom: 34px;
+            max-width: 520px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        /* Hero Interactive Canvas Board Mockup */
+        .canvas-preview-board {
+            background: #ffffff;
+            border: 1px solid var(--border-light);
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: var(--shadow-float);
+            position: relative;
+            min-height: 420px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow: hidden;
+            background-image: radial-gradient(rgba(0, 0, 0, 0.06) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        .board-card {
+            background: #ffffff;
+            border: 1px solid rgba(24, 24, 27, 0.08);
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+            width: 250px;
+            position: relative;
+            z-index: 2;
+            transition: all 0.3s ease;
+        }
+
+        .board-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(24, 24, 27, 0.2);
+        }
+
+        .card-top {
             display: flex;
             align-items: center;
             justify-content: space-between;
+            margin-bottom: 10px;
         }
-        
-        .hero-text {
-            flex: 1;
-            padding-right: 40px;
-        }
-        
-        .hero-text h1 {
-            font-size: 48px;
-            margin-bottom: 20px;
-            color: #222;
-        }
-        
-        .hero-text h1 span {
-            color: #4361ee;
-        }
-        
-        .hero-text p {
-            font-size: 18px;
-            color: #666;
-            margin-bottom: 30px;
-            max-width: 600px;
-        }
-        
-        .hero-buttons {
-            display: flex;
-            gap: 15px;
-        }
-        
-        .secondary-button {
-            background-color: white;
-            color: #4361ee;
-            border: 2px solid #4361ee;
-            padding: 12px 28px;
-            border-radius: 6px;
+
+        .tag-pill {
+            font-size: 11px;
             font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        .tag-amber { background: #fef3c7; color: #b45309; }
+        .tag-blue { background: #dbeafe; color: #1e40af; }
+
+        .card-heading {
+            font-size: 14px;
+            font-weight: 600;
+            color: #18181b;
+            margin-bottom: 6px;
+        }
+
+        .card-text {
+            font-size: 12px;
+            color: #71717a;
+            line-height: 1.5;
+        }
+
+        /* Cursor simulation */
+        .simulated-cursor {
+            position: absolute;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            pointer-events: none;
+        }
+
+        .cursor-pointer {
+            width: 16px;
+            height: 16px;
+            color: #2563eb;
+            transform: rotate(-30deg);
+        }
+
+        .cursor-tag {
+            background: #2563eb;
+            color: #ffffff;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 2px 6px;
+            border-radius: 4px;
+            box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
+        }
+
+        /* SVG Connection Line */
+        .canvas-svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 100px 0;
+            border-top: 1px solid var(--border-light);
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 680px;
+            margin: 0 auto 64px;
+        }
+
+        .section-header h2 {
+            font-family: var(--font-serif);
+            font-size: 40px;
+            font-weight: 600;
+            letter-spacing: -0.8px;
+            margin-bottom: 16px;
+            color: #18181b;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 17px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+
+        .feature-card {
+            background: #ffffff;
+            border: 1px solid var(--border-light);
+            border-radius: 16px;
+            padding: 34px;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-float);
+            border-color: var(--border-hover);
+        }
+
+        .feature-icon-bubble {
+            width: 48px;
+            height: 48px;
+            background: #f4f3ee;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: #18181b;
+            margin-bottom: 22px;
+        }
+
+        .feature-card h3 {
+            font-size: 19px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #18181b;
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 15px;
+            line-height: 1.65;
+        }
+
+        /* Metrics / Impact Section */
+        .metrics {
+            padding: 80px 0;
+            background: #f4f3ee;
+            border-top: 1px solid var(--border-light);
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        .metric-cell {
+            text-align: center;
+            padding: 24px;
+        }
+
+        .metric-digit {
+            font-family: var(--font-serif);
+            font-size: 48px;
+            font-weight: 700;
+            color: #18181b;
+            letter-spacing: -1px;
+            margin-bottom: 6px;
+        }
+
+        .metric-cell h4 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #27272a;
+            margin-bottom: 4px;
+        }
+
+        .metric-cell p {
+            color: #71717a;
+            font-size: 14px;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            padding: 100px 0;
+        }
+
+        .testimonial-slider-card {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #ffffff;
+            border: 1px solid var(--border-light);
+            border-radius: 24px;
+            padding: 56px;
+            text-align: center;
+            box-shadow: var(--shadow-float);
+            position: relative;
+        }
+
+        .quote-icon {
+            font-family: var(--font-serif);
+            font-size: 48px;
+            line-height: 1;
+            color: var(--brand-accent);
+            margin-bottom: 20px;
+        }
+
+        .testimonial-quote {
+            font-family: var(--font-serif);
+            font-size: 23px;
+            font-style: italic;
+            line-height: 1.6;
+            color: #27272a;
+            margin-bottom: 34px;
+        }
+
+        .author-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #18181b;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 17px;
+        }
+
+        .author-details h5 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #18181b;
+        }
+
+        .author-details span {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .slider-nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 14px;
+            margin-top: 28px;
+        }
+
+        .arrow-btn {
+            background: #ffffff;
+            border: 1px solid var(--border-light);
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: #18181b;
+            transition: all 0.2s;
+        }
+
+        .arrow-btn:hover {
+            border-color: #18181b;
+        }
+
+        .slider-pills {
+            display: flex;
+            gap: 6px;
+        }
+
+        .slider-pill {
+            width: 8px;
+            height: 8px;
+            border-radius: 999px;
+            background: #d4d4d8;
             cursor: pointer;
             transition: all 0.3s;
         }
-        
-        .secondary-button:hover {
-            background-color: #f0f4ff;
+
+        .slider-pill.active {
+            width: 24px;
+            background: #18181b;
         }
-        
-        .hero-image {
-            flex: 1;
-            text-align: center;
-        }
-        
-        .hero-image img {
-            max-width: 100%;
-            border-radius: 10px;
-            box-shadow: 0 20px 40px rgba(67, 97, 238, 0.15);
-        }
-        
-        /* Features Section */
-        .section-title {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-        
-        .section-title h2 {
-            font-size: 36px;
-            color: #222;
-            margin-bottom: 15px;
-        }
-        
-        .section-title p {
-            color: #666;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-        
-        .features {
-            padding: 100px 0;
-            background-color: white;
-        }
-        
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-        }
-        
-        .feature-card {
-            background: #fff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        
-        .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-        }
-        
-        .feature-icon {
-            background-color: #eef2ff;
-            color: #4361ee;
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 20px;
-            font-size: 28px;
-        }
-        
-        .feature-card h3 {
-            font-size: 22px;
-            margin-bottom: 15px;
-        }
-        
-        .feature-card p {
-            color: #666;
-        }
-        
-        /* Benefits Section */
-        .benefits {
-            padding: 100px 0;
-            background-color: #f0f4ff;
-        }
-        
-        .benefits-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-        }
-        
-        .benefit-item {
-            text-align: center;
-            padding: 30px 20px;
-        }
-        
-        .benefit-icon {
-            color: #4361ee;
-            font-size: 40px;
-            margin-bottom: 20px;
-        }
-        
-        .benefit-item h3 {
-            font-size: 22px;
-            margin-bottom: 15px;
-        }
-        
-        .benefit-item p {
-            color: #666;
-        }
-        
-        /* Testimonials */
-        .testimonials {
-            padding: 100px 0;
-            background-color: white;
-        }
-        
-        .testimonial-slider {
-            max-width: 800px;
-            margin: 0 auto;
-            position: relative;
-        }
-        
-        .testimonial {
-            background: #f9fbfd;
-            padding: 40px;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-        }
-        
-        .testimonial-text {
-            font-size: 18px;
-            font-style: italic;
-            margin-bottom: 30px;
-            color: #555;
-        }
-        
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .author-avatar {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background-color: #ddd;
-            margin-right: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            color: #4361ee;
-            font-size: 24px;
-        }
-        
-        .author-info h4 {
-            font-size: 18px;
-            margin-bottom: 5px;
-        }
-        
-        .author-info p {
-            color: #777;
-            font-size: 14px;
-        }
-        
+
         /* Pricing Section */
         .pricing {
             padding: 100px 0;
-            background-color: #f9fbfd;
+            border-top: 1px solid var(--border-light);
         }
-        
-        .pricing-grid {
+
+        .billing-toggle-wrap {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            margin-bottom: 50px;
+        }
+
+        .billing-toggle-wrap span {
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+
+        .billing-toggle-wrap span.active {
+            color: #18181b;
+            font-weight: 700;
+        }
+
+        .toggle-track {
+            width: 50px;
+            height: 28px;
+            background: #e4e4e7;
+            border-radius: 9999px;
+            padding: 3px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .toggle-thumb {
+            width: 22px;
+            height: 22px;
+            background: #ffffff;
+            border-radius: 50%;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+            transition: all 0.3s;
+        }
+
+        .toggle-track.annual .toggle-thumb {
+            transform: translateX(22px);
+        }
+
+        .discount-badge {
+            background: #ecfdf5;
+            color: #047857;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 999px;
+            border: 1px solid rgba(4, 120, 87, 0.2);
+        }
+
+        .pricing-cards {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 30px;
+            align-items: stretch;
         }
-        
-        .pricing-card {
-            background: white;
-            border-radius: 10px;
-            padding: 40px 30px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-            text-align: center;
-            transition: transform 0.3s;
-        }
-        
-        .pricing-card.featured {
-            border-top: 5px solid #4361ee;
-            transform: scale(1.05);
+
+        .price-card {
+            background: #ffffff;
+            border: 1px solid var(--border-light);
+            border-radius: 18px;
+            padding: 40px 32px;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s;
             position: relative;
         }
-        
-        .featured-badge {
+
+        .price-card.featured {
+            border: 2px solid #18181b;
+            box-shadow: var(--shadow-float);
+            transform: scale(1.03);
+        }
+
+        .card-badge {
             position: absolute;
             top: -12px;
             left: 50%;
             transform: translateX(-50%);
-            background-color: #4361ee;
-            color: white;
-            padding: 5px 20px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 600;
-        }
-        
-        .pricing-card:hover {
-            transform: translateY(-10px);
-        }
-        
-        .pricing-card.featured:hover {
-            transform: scale(1.05) translateY(-10px);
-        }
-        
-        .plan-name {
-            font-size: 24px;
-            margin-bottom: 15px;
-            color: #333;
-        }
-        
-        .plan-price {
-            font-size: 48px;
+            background: #18181b;
+            color: #ffffff;
+            font-size: 11px;
             font-weight: 700;
-            color: #4361ee;
-            margin-bottom: 20px;
+            padding: 4px 14px;
+            border-radius: 9999px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
-        
-        .plan-price span {
-            font-size: 16px;
-            color: #777;
+
+        .plan-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #18181b;
+            margin-bottom: 6px;
         }
-        
-        .plan-features {
-            list-style: none;
+
+        .plan-desc {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+            min-height: 42px;
+        }
+
+        .price-row {
+            display: flex;
+            align-items: baseline;
+            gap: 6px;
             margin-bottom: 30px;
         }
-        
-        .plan-features li {
-            padding: 10px 0;
-            border-bottom: 1px solid #eee;
-            color: #555;
+
+        .price-amount {
+            font-family: var(--font-serif);
+            font-size: 48px;
+            font-weight: 700;
+            color: #18181b;
         }
-        
-        .plan-features li:last-child {
-            border-bottom: none;
+
+        .price-cycle {
+            font-size: 14px;
+            color: var(--text-muted);
         }
-        
-        /* CTA Section */
-        .cta-section {
-            padding: 100px 0;
-            background: linear-gradient(135deg, #4361ee 0%, #3a56d4 100%);
+
+        .plan-checklist {
+            list-style: none;
+            margin-bottom: 36px;
+            flex-grow: 1;
+        }
+
+        .plan-checklist li {
+            font-size: 14px;
+            color: #3f3f46;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .plan-checklist li i {
+            color: #18181b;
+            font-size: 13px;
+        }
+
+        /* Banner CTA */
+        .cta-box {
+            background-color: #18181b;
+            color: #ffffff;
+            border-radius: 24px;
+            padding: 80px 40px;
             text-align: center;
-            color: white;
+            margin: 60px 0 100px;
+            box-shadow: 0 25px 50px -12px rgba(24, 24, 27, 0.25);
         }
-        
-        .cta-section h2 {
-            font-size: 36px;
-            margin-bottom: 20px;
+
+        .cta-box h2 {
+            font-family: var(--font-serif);
+            font-size: 42px;
+            font-weight: 600;
+            margin-bottom: 18px;
+            letter-spacing: -0.5px;
         }
-        
-        .cta-section p {
+
+        .cta-box p {
+            color: #a1a1aa;
             font-size: 18px;
-            max-width: 700px;
-            margin: 0 auto 30px;
-            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto 36px;
         }
-        
-        .cta-section .cta-button {
-            background-color: white;
-            color: #4361ee;
-            font-size: 16px;
-            padding: 15px 40px;
-        }
-        
-        .cta-section .cta-button:hover {
-            background-color: #f0f4ff;
-        }
-        
+
         /* Footer */
         footer {
-            background-color: #222;
-            color: #ccc;
-            padding: 70px 0 20px;
+            border-top: 1px solid var(--border-light);
+            background: #ffffff;
+            padding: 80px 0 30px;
         }
-        
-        .footer-content {
+
+        .footer-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
-            margin-bottom: 50px;
+            grid-template-columns: 2fr repeat(3, 1fr);
+            gap: 48px;
+            margin-bottom: 60px;
         }
-        
-        .footer-column h3 {
-            font-size: 20px;
-            color: white;
-            margin-bottom: 25px;
+
+        .footer-brand p {
+            color: var(--text-muted);
+            font-size: 14px;
+            line-height: 1.7;
+            margin-top: 16px;
+            max-width: 320px;
         }
-        
+
+        .footer-column h4 {
+            font-size: 14px;
+            font-weight: 700;
+            color: #18181b;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
         .footer-links {
             list-style: none;
         }
-        
+
         .footer-links li {
             margin-bottom: 12px;
         }
-        
+
         .footer-links a {
-            color: #aaa;
+            color: var(--text-muted);
             text-decoration: none;
-            transition: color 0.3s;
-        }
-        
-        .footer-links a:hover {
-            color: #4361ee;
-        }
-        
-        .copyright {
-            text-align: center;
-            padding-top: 20px;
-            border-top: 1px solid #444;
             font-size: 14px;
-            color: #888;
+            transition: color 0.2s;
         }
-        
-        /* Responsive Design */
+
+        .footer-links a:hover {
+            color: #18181b;
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 28px;
+            border-top: 1px solid var(--border-light);
+            font-size: 13px;
+            color: var(--text-subtle);
+        }
+
+        /* Notification Toast */
+        .toast-bubble {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #18181b;
+            color: #ffffff;
+            padding: 14px 22px;
+            border-radius: 9999px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        .toast-bubble.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
         @media (max-width: 992px) {
-            .hero-content {
-                flex-direction: column;
-            }
-            
-            .hero-text {
-                padding-right: 0;
-                margin-bottom: 50px;
+            .hero-grid {
+                grid-template-columns: 1fr;
                 text-align: center;
             }
-            
-            .hero-text p {
-                margin: 0 auto 30px;
+
+            .hero-desc {
+                margin: 0 auto 34px;
             }
-            
-            .pricing-card.featured {
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .metrics-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .pricing-cards {
+                grid-template-columns: 1fr;
+                max-width: 480px;
+                margin: 0 auto;
+            }
+
+            .price-card.featured {
                 transform: none;
             }
-            
-            .pricing-card.featured:hover {
-                transform: translateY(-10px);
+
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
-        
+
         @media (max-width: 768px) {
-            .nav-links {
+            .nav-links, .nav-actions .btn-black {
                 display: none;
             }
-            
-            .mobile-menu-btn {
+
+            .mobile-btn {
                 display: block;
             }
-            
-            .hero-text h1 {
-                font-size: 36px;
-            }
-            
-            .section-title h2 {
-                font-size: 30px;
-            }
-            
-            .hero-buttons {
+
+            .nav-links.mobile-open {
+                display: flex;
                 flex-direction: column;
-                align-items: center;
-            }
-            
-            .hero-buttons button {
+                position: absolute;
+                top: 74px;
+                left: 0;
                 width: 100%;
-                max-width: 300px;
+                background: #ffffff;
+                padding: 24px;
+                border-bottom: 1px solid var(--border-light);
             }
-        }
-        
-        @media (max-width: 576px) {
-            .hero {
-                padding: 130px 0 80px;
+
+            .hero-title {
+                font-size: 38px;
             }
-            
-            .features, .benefits, .testimonials, .pricing, .cta-section {
-                padding: 70px 0;
+
+            .features-grid {
+                grid-template-columns: 1fr;
             }
-            
-            .feature-card, .testimonial {
-                padding: 25px;
+
+            .metrics-grid {
+                grid-template-columns: 1fr;
             }
-            
-            .plan-price {
-                font-size: 36px;
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 12px;
+                text-align: center;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Header & Navigation -->
+
+    <!-- Notification Ribbon -->
+    <div class="top-ribbon">
+        ✦ AuraFlow 4.0 is now live: Bi-directional neural canvas & offline sync. 
+        <a href="#features">See what's new &rarr;</a>
+    </div>
+
+    <!-- Navigation Header -->
     <header>
         <div class="container">
             <nav>
-                <div class="logo">
-                    <div class="logo-icon"><i class="fas fa-bezier-curve"></i></div>
-                    <div class="logo-text">Code<span>Flow</span></div>
-                </div>
-                
+                <a href="#" class="logo">
+                    <div class="logo-symbol"><i class="fas fa-layer-group"></i></div>
+                    <div class="logo-text">AuraFlow</div>
+                </a>
+
                 <ul class="nav-links">
-                    <li><a href="#features">Features</a></li>
-                    <li><a href="#benefits">Benefits</a></li>
-                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#features">Spatial Canvas</a></li>
+                    <li><a href="#metrics">Impact</a></li>
+                    <li><a href="#testimonials">Community</a></li>
                     <li><a href="#pricing">Pricing</a></li>
-                    <li><a href="#">Resources</a></li>
+                    <li><a href="#">Manifesto</a></li>
                 </ul>
-                
-                <button class="cta-button">Start Free Trial</button>
-                <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+
+                <div class="nav-actions">
+                    <a href="#pricing" class="btn-white" style="padding: 8px 18px;">Sign In</a>
+                    <button class="btn-black" onclick="popToast('Opening free spatial workspace...')">
+                        Start Thinking Free <i class="fas fa-arrow-right"></i>
+                    </button>
+                    <button class="mobile-btn" id="menuToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
             </nav>
         </div>
     </header>
@@ -591,17 +978,56 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <h1>Build Apps Faster With <span>Visual Development</span></h1>
-                    <p>CodeFlow empowers teams to create enterprise-grade applications with minimal coding. Drag, drop, and connect components to build powerful web and mobile apps in record time.</p>
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <div class="hero-pill">
+                        <i class="fas fa-sparkles"></i> The Spatial Workspace for Deep Thinkers
+                    </div>
+                    <h1 class="hero-title">Where complex ideas <em>organically</em> find their shape.</h1>
+                    <p class="hero-desc">
+                        Break free from linear documents and rigid folders. AuraFlow maps your research, strategy, and creative sparks into an interconnected visual canvas.
+                    </p>
                     <div class="hero-buttons">
-                        <button class="cta-button">Start Building Free</button>
-                        <button class="secondary-button">Watch Demo</button>
+                        <button class="btn-black" onclick="popToast('Spinning up infinite sandbox...')">
+                            Create Your First Canvas
+                        </button>
+                        <a href="#features" class="btn-white">
+                            Explore Public Knowledge Bases
+                        </a>
                     </div>
                 </div>
-                <div class="hero-image">
-                    <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="CodeFlow Platform Interface">
+
+                <!-- Interactive Spatial Board Simulation -->
+                <div class="canvas-preview-board">
+                    <svg class="canvas-svg">
+                        <path d="M 140 120 C 190 120, 180 260, 240 260" stroke="#d4d4d8" stroke-width="2" stroke-dasharray="4" fill="none"/>
+                    </svg>
+
+                    <!-- Card 1 -->
+                    <div class="board-card" style="align-self: flex-start;">
+                        <div class="card-top">
+                            <span class="tag-pill tag-amber">Synthesis</span>
+                            <i class="fas fa-ellipsis" style="color: #a1a1aa; font-size: 12px;"></i>
+                        </div>
+                        <div class="card-heading">Cognitive Load in LLM UX</div>
+                        <p class="card-text">Linear chat feeds limit human perspective. Spatial cards allow multi-threaded context retention.</p>
+                    </div>
+
+                    <!-- Simulated Multiplayer Cursor -->
+                    <div class="simulated-cursor" style="top: 170px; left: 190px;">
+                        <i class="fas fa-location-arrow cursor-pointer"></i>
+                        <span class="cursor-tag">Sarah Chen</span>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="board-card" style="align-self: flex-end; margin-top: 40px;">
+                        <div class="card-top">
+                            <span class="tag-pill tag-blue">Architecture</span>
+                            <i class="fas fa-link" style="color: #a1a1aa; font-size: 11px;"></i>
+                        </div>
+                        <div class="card-heading">CRDT Local-First Sync</div>
+                        <p class="card-text">Zero roundtrip latency. Conflict-free peer merges directly in your local SQLite store.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -610,128 +1036,121 @@
     <!-- Features Section -->
     <section class="features" id="features">
         <div class="container">
-            <div class="section-title">
-                <h2>Powerful Features for Rapid Development</h2>
-                <p>CodeFlow provides all the tools you need to build, deploy, and scale applications without writing extensive code.</p>
+            <div class="section-header">
+                <h2>Designed for High-Bandwidth Cognition</h2>
+                <p>Every tool, gesture, and interaction is engineered to minimize cognitive overhead and keep you in deep flow.</p>
             </div>
-            
+
             <div class="features-grid">
                 <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-th-large"></i>
+                    <div class="feature-icon-bubble">
+                        <i class="fas fa-compass-drafting"></i>
                     </div>
-                    <h3>Visual Builder</h3>
-                    <p>Drag and drop UI components to design responsive interfaces. Connect data sources with simple point-and-click actions.</p>
+                    <h3>Infinite Fluid Canvas</h3>
+                    <p>Pan, zoom, and organize unstructured thoughts without artificial boundaries or file hierarchical limits.</p>
                 </div>
-                
+
                 <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-database"></i>
+                    <div class="feature-icon-bubble">
+                        <i class="fas fa-circle-nodes"></i>
                     </div>
-                    <h3>Database Integration</h3>
-                    <p>Connect to any data source with built-in connectors. Automatically generate CRUD operations without writing SQL.</p>
+                    <h3>Bi-Directional Neural Links</h3>
+                    <p>Connect concepts with semantic lines. AuraFlow surfaces hidden serendipitous connections across past research.</p>
                 </div>
-                
+
                 <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-mobile-alt"></i>
+                    <div class="feature-icon-bubble">
+                        <i class="fas fa-wifi"></i>
                     </div>
-                    <h3>Cross-Platform</h3>
-                    <p>Build once, deploy everywhere. Generate applications for web, iOS, and Android from a single visual design.</p>
+                    <h3>Local-First & Offline Ready</h3>
+                    <p>Your data stays on your machine first. Works flawlessly at 35,000 feet without requiring an active server ping.</p>
                 </div>
-                
+
                 <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-code"></i>
+                    <div class="feature-icon-bubble">
+                        <i class="fas fa-wand-magic-sparkles"></i>
                     </div>
-                    <h3>Extensible with Code</h3>
-                    <p>Add custom functionality with JavaScript when needed. Our platform doesn't limit your creativity or complexity.</p>
+                    <h3>Non-Invasive AI Synthesizer</h3>
+                    <p>AI that sits quietly until invoked. Summarize clusters of cards or draft architectural memos on demand.</p>
                 </div>
-                
+
                 <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-shield-alt"></i>
+                    <div class="feature-icon-bubble">
+                        <i class="fas fa-keyboard"></i>
                     </div>
-                    <h3>Enterprise Security</h3>
-                    <p>Built-in authentication, authorization, and data encryption. SOC2 compliant with enterprise-grade security features.</p>
+                    <h3>100% Keyboard Driven</h3>
+                    <p>Command-K omnibar and Vim-like spatial navigation keep your hands glued to the keyboard for frictionless writing.</p>
                 </div>
-                
+
                 <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-rocket"></i>
+                    <div class="feature-icon-bubble">
+                        <i class="fas fa-lock"></i>
                     </div>
-                    <h3>One-Click Deployment</h3>
-                    <p>Deploy to cloud or on-premises with a single click. Automatic scaling and monitoring included.</p>
+                    <h3>End-to-End Encryption</h3>
+                    <p>Zero-knowledge cryptographic vaults protect your confidential strategic roadmaps and proprietary findings.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Benefits Section -->
-    <section class="benefits" id="benefits">
+    <!-- Metrics Section -->
+    <section class="metrics" id="metrics">
         <div class="container">
-            <div class="section-title">
-                <h2>Why Choose CodeFlow?</h2>
-                <p>Join thousands of companies accelerating their digital transformation with low-code development.</p>
-            </div>
-            
-            <div class="benefits-grid">
-                <div class="benefit-item">
-                    <div class="benefit-icon">
-                        <i class="fas fa-bolt"></i>
-                    </div>
-                    <h3>10x Faster Development</h3>
-                    <p>Build applications in days instead of months with visual development tools.</p>
+            <div class="metrics-grid">
+                <div class="metric-cell">
+                    <div class="metric-digit">4.8&times;</div>
+                    <h4>Insight Retention</h4>
+                    <p>Compared to traditional linear docs</p>
                 </div>
-                
-                <div class="benefit-item">
-                    <div class="benefit-icon">
-                        <i class="fas fa-money-bill-wave"></i>
-                    </div>
-                    <h3>Reduce Costs by 70%</h3>
-                    <p>Lower development and maintenance costs with fewer resources required.</p>
+                <div class="metric-cell">
+                    <div class="metric-digit">0ms</div>
+                    <h4>Input Latency</h4>
+                    <p>Native Rust & WebAssembly engine</p>
                 </div>
-                
-                <div class="benefit-item">
-                    <div class="benefit-icon">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <h3>Citizen Developers</h3>
-                    <p>Enable business users to build solutions with minimal IT assistance.</p>
+                <div class="metric-cell">
+                    <div class="metric-digit">180K+</div>
+                    <h4>Spatial Canvases</h4>
+                    <p>Created by scientists & founders</p>
                 </div>
-                
-                <div class="benefit-item">
-                    <div class="benefit-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <h3>Scale Effortlessly</h3>
-                    <p>From prototype to enterprise-scale applications with the same platform.</p>
+                <div class="metric-cell">
+                    <div class="metric-digit">100%</div>
+                    <h4>Data Ownership</h4>
+                    <p>Plain Markdown & SQLite exports</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Testimonials -->
+    <!-- Testimonials Section -->
     <section class="testimonials" id="testimonials">
         <div class="container">
-            <div class="section-title">
-                <h2>Trusted by Industry Leaders</h2>
-                <p>See what our customers have to say about their experience with CodeFlow.</p>
+            <div class="section-header">
+                <h2>Loved by Research Directors & Architects</h2>
+                <p>See why teams at leading design labs and deep-tech startups make AuraFlow their intellectual headquarters.</p>
             </div>
-            
-            <div class="testimonial-slider">
-                <div class="testimonial">
-                    <div class="testimonial-text">
-                        "CodeFlow transformed how we deliver solutions to our business units. What used to take 6 months now takes 3 weeks. Our development team can focus on complex problems while business teams build their own solutions."
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">SC</div>
-                        <div class="author-info">
-                            <h4>Sarah Chen</h4>
-                            <p>CTO, TechGrowth Inc.</p>
-                        </div>
+
+            <div class="testimonial-slider-card">
+                <div class="quote-icon">&ldquo;</div>
+                <p class="testimonial-quote" id="quoteText">
+                    "AuraFlow fundamentally changed how our engineering leadership designs systems. We mapped our entire distributed database architecture in one afternoon without feeling boxed in."
+                </p>
+                <div class="author-info">
+                    <div class="author-avatar" id="quoteAvatar">MK</div>
+                    <div class="author-details">
+                        <h5 id="quoteAuthor">Dr. Marcus Kjellberg</h5>
+                        <span id="quoteRole">Principal Systems Architect, Nordic Labs</span>
                     </div>
                 </div>
+            </div>
+
+            <div class="slider-nav">
+                <button class="arrow-btn" onclick="prevTestimonial()"><i class="fas fa-arrow-left"></i></button>
+                <div class="slider-pills">
+                    <div class="slider-pill active" onclick="jumpTestimonial(0)"></div>
+                    <div class="slider-pill" onclick="jumpTestimonial(1)"></div>
+                    <div class="slider-pill" onclick="jumpTestimonial(2)"></div>
+                </div>
+                <button class="arrow-btn" onclick="nextTestimonial()"><i class="fas fa-arrow-right"></i></button>
             </div>
         </div>
     </section>
@@ -739,228 +1158,257 @@
     <!-- Pricing Section -->
     <section class="pricing" id="pricing">
         <div class="container">
-            <div class="section-title">
-                <h2>Simple, Transparent Pricing</h2>
-                <p>Choose the plan that fits your needs. All plans include core features with no hidden fees.</p>
+            <div class="section-header">
+                <h2>Simple, Honest Pricing</h2>
+                <p>Start free forever. Upgrade when you need team-wide multiplayer synchronization and enterprise security.</p>
             </div>
-            
-            <div class="pricing-grid">
-                <div class="pricing-card">
-                    <h3 class="plan-name">Starter</h3>
-                    <div class="plan-price">$29<span>/month</span></div>
-                    <ul class="plan-features">
-                        <li>Up to 5 users</li>
-                        <li>10 GB storage</li>
-                        <li>Basic components</li>
-                        <li>Community support</li>
-                        <li>1 production app</li>
-                    </ul>
-                    <button class="secondary-button">Get Started</button>
+
+            <div class="billing-toggle-wrap">
+                <span id="optMonthly" class="active">Billed Monthly</span>
+                <div class="toggle-track" id="priceToggle" onclick="togglePricePeriod()">
+                    <div class="toggle-thumb"></div>
                 </div>
-                
-                <div class="pricing-card featured">
-                    <div class="featured-badge">Most Popular</div>
-                    <h3 class="plan-name">Professional</h3>
-                    <div class="plan-price">$89<span>/month</span></div>
-                    <ul class="plan-features">
-                        <li>Up to 25 users</li>
-                        <li>100 GB storage</li>
-                        <li>All components</li>
-                        <li>Priority support</li>
-                        <li>10 production apps</li>
-                        <li>Custom branding</li>
+                <span id="optAnnual">Annual Billing <span class="discount-badge">Save 20%</span></span>
+            </div>
+
+            <div class="pricing-cards">
+                <!-- Personal Tier -->
+                <div class="price-card">
+                    <h3 class="plan-title">Thinker</h3>
+                    <p class="plan-desc">For independent researchers, writers, and solo thinkers creating mental maps.</p>
+                    <div class="price-row">
+                        <span class="price-amount">$0</span>
+                        <span class="price-cycle">/forever</span>
+                    </div>
+                    <ul class="plan-checklist">
+                        <li><i class="fas fa-check"></i> Unlimited local canvases</li>
+                        <li><i class="fas fa-check"></i> Full Markdown & SQLite export</li>
+                        <li><i class="fas fa-check"></i> 500 semantic node links</li>
+                        <li><i class="fas fa-check"></i> Community Discord access</li>
                     </ul>
-                    <button class="cta-button">Try Free for 14 Days</button>
+                    <button class="btn-white" style="width: 100%; justify-content: center;" onclick="popToast('Thinker plan activated!')">Get Started Free</button>
                 </div>
-                
-                <div class="pricing-card">
-                    <h3 class="plan-name">Enterprise</h3>
-                    <div class="plan-price">Custom</div>
-                    <ul class="plan-features">
-                        <li>Unlimited users</li>
-                        <li>Unlimited storage</li>
-                        <li>All features included</li>
-                        <li>24/7 dedicated support</li>
-                        <li>Unlimited apps</li>
-                        <li>On-premises option</li>
+
+                <!-- Featured Studio Tier -->
+                <div class="price-card featured">
+                    <div class="card-badge">Most Popular</div>
+                    <h3 class="plan-title">Studio Pro</h3>
+                    <p class="plan-desc">For architects, product managers, and founders structuring complex projects.</p>
+                    <div class="price-row">
+                        <span class="price-amount" id="priceProVal">$16</span>
+                        <span class="price-cycle">/month</span>
+                    </div>
+                    <ul class="plan-checklist">
+                        <li><i class="fas fa-check"></i> Unlimited real-time canvas sync</li>
+                        <li><i class="fas fa-check"></i> Full peer multiplayer presence</li>
+                        <li><i class="fas fa-check"></i> Unlimited semantic neural links</li>
+                        <li><i class="fas fa-check"></i> Contextual AI Synthesizer included</li>
+                        <li><i class="fas fa-check"></i> Unlimited card version history</li>
                     </ul>
-                    <button class="secondary-button">Contact Sales</button>
+                    <button class="btn-black" style="width: 100%; justify-content: center;" onclick="popToast('Selected Studio Pro 14-day trial')">Start 14-Day Trial</button>
+                </div>
+
+                <!-- Enterprise Tier -->
+                <div class="price-card">
+                    <h3 class="plan-title">Organization</h3>
+                    <p class="plan-desc">For organizations requiring zero-knowledge encryption and compliance SSO.</p>
+                    <div class="price-row">
+                        <span class="price-amount">Custom</span>
+                    </div>
+                    <ul class="plan-checklist">
+                        <li><i class="fas fa-check"></i> SAML SSO & Okta integration</li>
+                        <li><i class="fas fa-check"></i> Self-hosted sync server option</li>
+                        <li><i class="fas fa-check"></i> Dedicated customer success partner</li>
+                        <li><i class="fas fa-check"></i> Custom data retention rules</li>
+                    </ul>
+                    <button class="btn-white" style="width: 100%; justify-content: center;" onclick="popToast('Enterprise concierge contacted')">Contact Sales</button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="cta-section">
-        <div class="container">
-            <h2>Start Building Today</h2>
-            <p>Join over 10,000 companies that use CodeFlow to accelerate their application development. No credit card required for the free trial.</p>
-            <button class="cta-button">Get Started for Free</button>
-        </div>
-    </section>
+    <!-- Call to Action Banner -->
+    <div class="container">
+        <section class="cta-box">
+            <h2>Give Your Thoughts the Space They Deserve.</h2>
+            <p>Join thousands of visionary creators building lasting clarity. Experience the spatial thinking revolution today.</p>
+            <button class="btn-white" style="font-size: 15px; padding: 14px 36px;" onclick="popToast('Creating instant workspace...')">
+                Start Thinking Free &rarr;
+            </button>
+        </section>
+    </div>
 
     <!-- Footer -->
     <footer>
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <div class="logo">
-                        <div class="logo-icon"><i class="fas fa-bezier-curve"></i></div>
-                        <div class="logo-text">Code<span>Flow</span></div>
-                    </div>
-                    <p style="margin-top: 20px; color: #aaa;">The leading visual development platform for building enterprise applications with minimal coding.</p>
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="logo">
+                        <div class="logo-symbol"><i class="fas fa-layer-group"></i></div>
+                        <div class="logo-text">AuraFlow</div>
+                    </a>
+                    <p>AuraFlow is dedicated to human cognitive sovereignty. Designed with care for thinkers who value deep clarity over algorithmic noise.</p>
                 </div>
-                
+
                 <div class="footer-column">
-                    <h3>Product</h3>
+                    <h4>Canvas</h4>
                     <ul class="footer-links">
-                        <li><a href="#">Features</a></li>
-                        <li><a href="#">Pricing</a></li>
-                        <li><a href="#">Use Cases</a></li>
-                        <li><a href="#">Integrations</a></li>
-                        <li><a href="#">Roadmap</a></li>
+                        <li><a href="#">Spatial Canvas</a></li>
+                        <li><a href="#">Neural Graph</a></li>
+                        <li><a href="#">Local-First Engine</a></li>
+                        <li><a href="#">Keyboard Shortcuts</a></li>
+                        <li><a href="#">Changelog</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="footer-column">
-                    <h3>Resources</h3>
+                    <h4>Philosophy</h4>
                     <ul class="footer-links">
-                        <li><a href="#">Documentation</a></li>
-                        <li><a href="#">Tutorials</a></li>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">Community</a></li>
-                        <li><a href="#">Support</a></li>
+                        <li><a href="#">Manifesto</a></li>
+                        <li><a href="#">Local-First Research</a></li>
+                        <li><a href="#">Data Sovereignty</a></li>
+                        <li><a href="#">Design System</a></li>
+                        <li><a href="#">Community Library</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="footer-column">
-                    <h3>Company</h3>
+                    <h4>Legal & Trust</h4>
                     <ul class="footer-links">
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Careers</a></li>
-                        <li><a href="#">Contact</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">End-to-End Encryption</a></li>
+                        <li><a href="#">Privacy Pledge</a></li>
+                        <li><a href="#">Terms of Canvas</a></li>
+                        <li><a href="#">Security Audit</a></li>
                     </ul>
                 </div>
             </div>
-            
-            <div class="copyright">
-                <p>&copy; 2023 CodeFlow. All rights reserved.</p>
+
+            <div class="footer-bottom">
+                <div>&copy; 2026 AuraFlow Labs. Designed for cognitive flow.</div>
+                <div>Local-first. Open formats. Private by default.</div>
             </div>
         </div>
     </footer>
 
+    <!-- Toast Notification -->
+    <div class="toast-bubble" id="toastNotice">
+        <i class="fas fa-check-circle" style="color: #4ade80;"></i>
+        <span id="toastText">Workspace initialized</span>
+    </div>
+
     <script>
-        // Mobile menu toggle
-        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
-            const navLinks = document.querySelector('.nav-links');
-            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
-            
-            // Adjust for mobile
-            if (window.innerWidth <= 768) {
-                if (navLinks.style.display === 'flex') {
-                    navLinks.style.flexDirection = 'column';
-                    navLinks.style.position = 'absolute';
-                    navLinks.style.top = '80px';
-                    navLinks.style.left = '0';
-                    navLinks.style.width = '100%';
-                    navLinks.style.backgroundColor = 'white';
-                    navLinks.style.padding = '20px';
-                    navLinks.style.boxShadow = '0 10px 20px rgba(0,0,0,0.1)';
-                    
-                    const navItems = document.querySelectorAll('.nav-links li');
-                    navItems.forEach(item => {
-                        item.style.margin = '10px 0';
-                    });
-                }
-            }
+        // Mobile Drawer
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('mobile-open');
         });
-        
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if(targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                    
-                    // Close mobile menu if open
-                    if(window.innerWidth <= 768) {
-                        document.querySelector('.nav-links').style.display = 'none';
-                    }
-                }
+
+        document.querySelectorAll('.nav-links a').forEach(a => {
+            a.addEventListener('click', () => {
+                navLinks.classList.remove('mobile-open');
             });
         });
-        
-        // Simple testimonial slider
-        const testimonials = [
+
+        // Price Toggle Calculation (Monthly vs Annual with 20% discount)
+        let isAnnualPlan = false;
+        const priceToggle = document.getElementById('priceToggle');
+        const optMonthly = document.getElementById('optMonthly');
+        const optAnnual = document.getElementById('optAnnual');
+        const priceProVal = document.getElementById('priceProVal');
+
+        function togglePricePeriod() {
+            isAnnualPlan = !isAnnualPlan;
+            priceToggle.classList.toggle('annual', isAnnualPlan);
+            optMonthly.classList.toggle('active', !isAnnualPlan);
+            optAnnual.classList.toggle('active', isAnnualPlan);
+
+            if (isAnnualPlan) {
+                priceProVal.textContent = '$12';
+            } else {
+                priceProVal.textContent = '$16';
+            }
+        }
+
+        // Testimonial Slider System
+        const quotes = [
             {
-                text: "CodeFlow transformed how we deliver solutions to our business units. What used to take 6 months now takes 3 weeks. Our development team can focus on complex problems while business teams build their own solutions.",
-                name: "Sarah Chen",
-                position: "CTO, TechGrowth Inc.",
-                initials: "SC"
+                text: "AuraFlow fundamentally changed how our engineering leadership designs systems. We mapped our entire distributed database architecture in one afternoon without feeling boxed in.",
+                author: "Dr. Marcus Kjellberg",
+                role: "Principal Systems Architect, Nordic Labs",
+                avatar: "MK"
             },
             {
-                text: "We reduced our app development time by 80% using CodeFlow. The visual interface made it easy for our analysts to build data dashboards without waiting for IT resources.",
-                name: "Marcus Johnson",
-                position: "Director of Operations, DataCorp",
-                initials: "MJ"
+                text: "The combination of spatial cards and local-first SQLite sync is pure genius. It feels like an extension of my physical desktop, but with infinite recall.",
+                author: "Claire Desjardins",
+                role: "Senior Partner, Atelier Venture Design",
+                avatar: "CD"
             },
             {
-                text: "As a non-technical founder, CodeFlow allowed me to build our MVP in just 2 months. I could test ideas quickly and iterate based on user feedback without deep coding knowledge.",
-                name: "Lisa Wang",
-                position: "Founder, StartupLabs",
-                initials: "LW"
+                text: "I finished my 300-page research thesis inside AuraFlow. Seeing the semantic connections between chapters visually made all the difference.",
+                author: "Taro Takahashi",
+                role: "Cognitive Science Fellow, Kyoto University",
+                avatar: "TT"
             }
         ];
-        
-        let currentTestimonial = 0;
-        const testimonialElement = document.querySelector('.testimonial');
-        
-        function rotateTestimonial() {
-            currentTestimonial = (currentTestimonial + 1) % testimonials.length;
-            updateTestimonial();
-        }
-        
-        function updateTestimonial() {
-            const testimonial = testimonials[currentTestimonial];
-            testimonialElement.innerHTML = `
-                <div class="testimonial-text">"${testimonial.text}"</div>
-                <div class="testimonial-author">
-                    <div class="author-avatar">${testimonial.initials}</div>
-                    <div class="author-info">
-                        <h4>${testimonial.name}</h4>
-                        <p>${testimonial.position}</p>
-                    </div>
-                </div>
-            `;
-        }
-        
-        // Auto-rotate testimonials every 5 seconds
-        setInterval(rotateTestimonial, 5000);
-        
-        // CTA button interactions
-        document.querySelectorAll('.cta-button').forEach(button => {
-            button.addEventListener('click', function() {
-                alert('Thank you for your interest in CodeFlow! You would be redirected to the signup page in a real implementation.');
+
+        let activeQuote = 0;
+        const quoteText = document.getElementById('quoteText');
+        const quoteAuthor = document.getElementById('quoteAuthor');
+        const quoteRole = document.getElementById('quoteRole');
+        const quoteAvatar = document.getElementById('quoteAvatar');
+        const pills = document.querySelectorAll('.slider-pills .slider-pill');
+
+        function renderTestimonial(idx) {
+            activeQuote = idx;
+            const item = quotes[idx];
+
+            quoteText.style.opacity = '0';
+            setTimeout(() => {
+                quoteText.textContent = `"${item.text}"`;
+                quoteAuthor.textContent = item.author;
+                quoteRole.textContent = item.role;
+                quoteAvatar.textContent = item.avatar;
+                quoteText.style.opacity = '1';
+            }, 180);
+
+            pills.forEach((p, i) => {
+                p.classList.toggle('active', i === idx);
             });
-        });
-        
-        // Pricing card interactions
-        document.querySelectorAll('.pricing-card button').forEach(button => {
-            button.addEventListener('click', function() {
-                const planName = this.closest('.pricing-card').querySelector('.plan-name').textContent;
-                alert(`You selected the ${planName} plan. In a real implementation, you would be redirected to the checkout process.`);
-            });
-        });
+        }
+
+        function nextTestimonial() {
+            let next = (activeQuote + 1) % quotes.length;
+            renderTestimonial(next);
+        }
+
+        function prevTestimonial() {
+            let prev = (activeQuote - 1 + quotes.length) % quotes.length;
+            renderTestimonial(prev);
+        }
+
+        function jumpTestimonial(i) {
+            renderTestimonial(i);
+        }
+
+        // Auto slide testimonials
+        setInterval(nextTestimonial, 5000);
+
+        // Toast Feedback System
+        const toastNotice = document.getElementById('toastNotice');
+        const toastText = document.getElementById('toastText');
+        let toastTimer;
+
+        function popToast(msg) {
+            clearTimeout(toastTimer);
+            toastText.textContent = msg;
+            toastNotice.classList.add('show');
+            toastTimer = setTimeout(() => {
+                toastNotice.classList.remove('show');
+            }, 2800);
+        }
     </script>
 </body>
 </html>
+```
